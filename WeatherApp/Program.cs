@@ -12,8 +12,9 @@ IConfiguration config = new ConfigurationBuilder()
 var form = new WeatherForm();
 form.ShowLoading();
 
-form.Load += async (_, _) =>
+async Task FetchWeatherAsync()
 {
+    form.ShowLoading();
     try
     {
         using var service = new WeatherService(config);
@@ -22,16 +23,19 @@ form.Load += async (_, _) =>
     }
     catch (InvalidOperationException ex) when (ex.Message.Contains("ApiKey"))
     {
-        form.ShowError("API key not configured.\n\nOpen appsettings.json and set your key.");
+        form.ShowError("API key not configured.\nOpen appsettings.json and set your key.");
     }
     catch (HttpRequestException ex)
     {
-        form.ShowError($"Network error:\n\n{ex.Message}");
+        form.ShowError($"Network error:\n{ex.Message}");
     }
     catch (Exception ex)
     {
-        form.ShowError($"Unexpected error:\n\n{ex.Message}");
+        form.ShowError($"Unexpected error:\n{ex.Message}");
     }
-};
+}
+
+form.Load             += async (_, _) => await FetchWeatherAsync();
+form.RefreshRequested += async (_, _) => await FetchWeatherAsync();
 
 Application.Run(form);
