@@ -1,0 +1,42 @@
+## Visual Studio / C# / .NET
+
+# Build output
+bin/
+obj/
+
+# Visual Studio cache and user-specific files
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# NuGet packages
+*.nupkg
+*.snupkg
+packages/
+!**/packages/repositories.config
+*.nuget.props
+*.nuget.targets
+
+# MSBuild binary log
+*.binlog
+
+# Rider
+.idea/
+*.sln.iml
+
+# OS files
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Publish output
+publish/
+**/Properties/PublishProfiles/
+
+# Secrets — never commit real API keys
+# (keep appsettings.json for structure, but add appsettings.Local.json to store real keys)
+appsettings.Local.json
+appsettings.*.json
+!appsettings.json
