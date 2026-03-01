@@ -38,7 +38,15 @@ public class WeatherForm : Form
     {
         SuspendLayout();
         InitializeComponents();
+        LoadAppIcon();
         ResumeLayout(false);
+    }
+
+    private void LoadAppIcon()
+    {
+        var iconPath = Path.Combine(AppContext.BaseDirectory, "WeatherApp.ico");
+        if (File.Exists(iconPath))
+            Icon = new Icon(iconPath);
     }
 
     private void InitializeComponents()
